@@ -1,2 +1,2 @@
-# Threejs
-Working with BIM data using Three's
+# Three.js
+Working with BIM data using Three.JS
