@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/awaism47/Threejs/issues"
   },
-  "homepage": "https://github.com/awaism47/Threejs#readme"
+  "homepage": "https://github.com/awaism47/Threejs#readme",
+  "dependencies": {
+    "three": "^0.149.0"
+  }
 }
