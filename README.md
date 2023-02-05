@@ -1,2 +1,2 @@
 # Three.js
-Working with BIM data using Three.JS
+In this project we will create solar system using Threejs library
