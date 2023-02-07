@@ -9,23 +9,31 @@ const material = new MeshBasicMaterial( {color: 'orange'} );
 const cubeMesh = new Mesh( geometry, material );
 scene.add( cubeMesh );
 
-//3 The Camera
-const sizes = {
-    width: 800,
-    height: 600,
-}
 
-const camera = new PerspectiveCamera(75, sizes.width/ sizes.height);
-camera.position.z = 3; // Z let's you move backwards and forwards. X is sideways, Y is upward and do
-scene.add( camera );
-
-//4 The Renderer
-const threeCanvas= document.getElementById('three-canvas')
+//4 The Renderer and HTML element
+const threeCanvas= document.getElementById('three-canvas');
 const renderer = new WebGLRenderer({
     canvas: threeCanvas,
 });
+const pixelRatio=Math.max(window.devicePixelRatio,2);
+renderer.setPixelRatio(pixelRatio);
+renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight,false);
 
-renderer.setSize(sizes.width, sizes.height);
+//Responsivity
+window.addEventListener('resize',()=>{
+    camera.aspect=threeCanvas.clientWidth/threeCanvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(threeCanvas.clientWidth,threeCanvas.clientHeight,false);
+})
+
+
+//Camera
+const camera = new PerspectiveCamera(75, threeCanvas.clientWidth/ threeCanvas.clientHeight);
+camera.position.z = 3; // Z let's you move backwards and forwards. X is sideways, Y is upward and do
+scene.add( camera );
+
+
+
 
 // Other cubes
 const greenMaterial = new MeshBasicMaterial( {color: 0x00ff00} );
@@ -41,6 +49,7 @@ scene.add(greenCube);
 scene.add(blueCube);
 
 
+//Animation
 
 function animate() {
     cubeMesh.rotation.x += 0.01;
