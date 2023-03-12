@@ -3,6 +3,7 @@ import{OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 
 import GUI from "three/examples/jsm/libs/lil-gui.module.min.js";
 
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 
 //1 The scene
@@ -35,6 +36,25 @@ const earthMesh = new Mesh(sphereGeometry, earthMaterial);
 earthMesh.position.set(5, 0, 0);
 earthMesh.add(wireframe);
 sunMesh.add(earthMesh);
+
+// Load model
+const loader = new GLTFLoader();
+
+const loadingScreen=document.getElementById("loader-container");
+
+loader.load('./Donut.glb',
+(gltf)=>{
+    scene.add(gltf.scene);
+    console.log('added to scene')
+    loadingScreen.classList.add("hidden")
+
+},
+(progress)=>{
+    console.log(progress)
+},
+(error)=>{
+    console.log(error)
+});
 
 //Adding axes of earth to visualise in reference to global axes
 const earthAxes=new AxesHelper()
